@@ -13,6 +13,11 @@ export const setPasswordLength = (length) => ({
     payload: includeLowercase,
   });
 
+  export const setIncludeNumber = (includeNumber) => ({
+    type: 'SET_INCLUDE_NUMBER',
+    payload: includeNumber
+  })
+
   export const generatePassword = () => ({
     type: 'GENERATE_PASSWORD',
   });
