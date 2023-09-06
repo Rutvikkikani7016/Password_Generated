@@ -1,4 +1,4 @@
-export const setPasswordLength = (length) => ({
+export const PasswordLength = (length) => ({
     type: 'SET_PASSWORD_LENGTH',
     payload: length,
   });

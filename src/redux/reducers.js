@@ -1,12 +1,12 @@
 const initialState = {
-    passwordLength: 8, // Default password length
-    password: '', // Generated password
+    passwordLength: 6,
+    password: '',
 };
 
 const rootReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'SET_PASSWORD_LENGTH':
-            const newPasswordLength = Math.min(30, Math.max(1, action.payload));
+            const newPasswordLength = Math.min(50, Math.max(1, action.payload));
             return {
                 ...state,
                 passwordLength: newPasswordLength,

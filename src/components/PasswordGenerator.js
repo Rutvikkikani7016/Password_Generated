@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setPasswordLength, generatePassword } from '../redux/actions';
+import { PasswordLength, generatePassword } from '../redux/actions';
 
 const PasswordGenerator = () => {
     const dispatch = useDispatch();
@@ -13,11 +13,18 @@ const PasswordGenerator = () => {
     };
 
     const handleSliderChange = (e) => {
-        dispatch(setPasswordLength(parseInt(e.target.value)));
-      };
+        dispatch(PasswordLength(parseInt(e.target.value)));
+    };
+
+    // for copy
+    const handlerCopy = async () => {
+        if (generatedPassword) {
+            await navigator.clipboard.writeText(generatePassword);
+            alert('copied..')
+        }
+    }
 
     return (<>
-
         <div className="container mt-5">
             <h1 className="text-center">Password Generator</h1>
             <div className="row justify-content-center">
@@ -25,19 +32,23 @@ const PasswordGenerator = () => {
                     <div className="card">
                         <div className="card-body">
                             <form id="passwordGeneratorForm">
-                                <div className="mb-3">
+                                <div className='row'>
                                     <label htmlFor="generatedPassword" className="form-label">Generated Password:</label>
-                                    <input type="text" className="form-control" value={generatedPassword} id="generatedPassword" readOnly />
+                                    <div className="mb-3 col-9">
+                                        <input type="text" className="form-control" value={generatedPassword} id="generatedPassword" readOnly />
+                                    </div>
+                                    <div className='col-3'>
+                                        <button className='btn btn-secondary' onClick={handlerCopy}>copy</button>
+                                    </div>
                                 </div>
                                 <div className='row'>
                                     <label htmlFor="passwordLength" className="form-label">Password Length:</label>
                                     <div className="mb-3 col-3">
-                                        <input type="number" className="form-control" min={1} max={12} defaultValue={8} value={passwordLength} onChange={(e) => dispatch(setPasswordLength(parseInt(e.target.value)))} />
+                                        <input type="number" className="form-control" value={passwordLength} onChange={(e) => dispatch(PasswordLength(parseInt(e.target.value)))} />
                                     </div>
                                     <div className="mb-1 col-6">
-
                                         <input type="range" className="form-range" value={passwordLength}
-                                        onChange={handleSliderChange} min={0} max={15} id="customRange2" />
+                                            onChange={handleSliderChange} min={0} max={50} id="customRange2" />
                                     </div>
                                 </div>
                                 <div className="text-center">
@@ -48,7 +59,7 @@ const PasswordGenerator = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     </>
     );
 };
