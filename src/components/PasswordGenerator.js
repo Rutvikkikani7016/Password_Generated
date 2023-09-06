@@ -1,27 +1,30 @@
-import React, {useEffect} from 'react';
+import React from 'react';
+// import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import {
     setPasswordLength,
     setIncludeUppercase,
     setIncludeLowercase,
     setIncludeNumber,
+    setIncludeSymboal,
+    //setCharacterType,
     generatePassword,
 } from '../redux/actions';
 
 const PasswordGenerator = () => {
     const dispatch = useDispatch();
-    const { passwordLength, includeUppercase, includeLowercase, includeNumber, password } = useSelector((state) => state);
+    const { passwordLength, includeUppercase, includeLowercase, includeNumber,includeSymboal, password } = useSelector((state) => state);
 
     const handleGenerate = (e) => {
         e.preventDefault()
         dispatch(generatePassword());
     };
 
-//    useEffect((e) => {
-//        e.preventDefault();
-//        dispatch(generatePassword());
-//        dispatch(setPasswordLength(parseInt(e.target.value)));
-//    });
+    //    useEffect((e) => {
+    //        e.preventDefault();
+    //        dispatch(generatePassword());
+    //        dispatch(setPasswordLength(parseInt(e.target.value)));
+    //    });
 
     const handleSliderChange = (e) => {
         dispatch(setPasswordLength(parseInt(e.target.value)));
@@ -55,7 +58,7 @@ const PasswordGenerator = () => {
                                 <label htmlFor="passwordLength" className="form-label">Password Length:</label>
                                 <div className='row'>
                                     <div className="mb-3 col-3">
-                                        <input type="number" className="form-control"  value={passwordLength} onChange={(e) => dispatch(setPasswordLength(parseInt(e.target.value)))} />
+                                        <input type="number" className="form-control" value={passwordLength} onChange={(e) => dispatch(setPasswordLength(parseInt(e.target.value)))} />
                                     </div>
                                     <div className="mb-1 col-6">
                                         <input type="range" className="form-range" value={passwordLength} onChange={handleSliderChange} min={0} max={50} id="customRange" />
@@ -63,19 +66,41 @@ const PasswordGenerator = () => {
                                 </div>
 
                                 <div className='row'>
-                                <label htmlFor="passwordLength" className="form-label">Select one of the checkboxes:</label>
+                                    <label htmlFor="passwordLength" className="form-label">Select one of the checkboxes:</label>
                                     <label>
                                         <input type="checkbox" checked={includeUppercase} onChange={(e) => dispatch(setIncludeUppercase(e.target.checked))} /> Add Uppercase &nbsp;
                                         <input type="checkbox" checked={includeLowercase} onChange={(e) => dispatch(setIncludeLowercase(e.target.checked))} /> Add Lowercase &nbsp;
-                                        <input type='checkbox' checked={includeNumber} onChange={(e) => dispatch(setIncludeNumber(e.target.checked))} /> Add number
+                                        <input type='checkbox' checked={includeNumber} onChange={(e) => dispatch(setIncludeNumber(e.target.checked))} /> Add number &nbsp;
+                                        <input type='checkbox' checked={includeSymboal} onChange={(e) => dispatch(setIncludeSymboal(e.target.checked))} /> Add Symboal
+                                    </label>
+                                    {/*<label>
+                                        <input
+                                            type="radio"
+                                            value="allCharacters"
+                                            checked={characterType === 'allCharacters'}
+                                            onChange={() => dispatch(setCharacterType('allCharacters'))}
+                                        />{' '}
+                                        All Characters
                                     </label>
                                     <label>
-                                        <input type="checkbox" checked={includeLowercase} onChange={(e) => dispatch(setIncludeLowercase(e.target.checked))} /> Add Lowercase
+                                        <input
+                                            type="radio"
+                                            value="easyToRead"
+                                            checked={characterType === 'easyToRead'}
+                                            onChange={() => dispatch(setCharacterType('easyToRead'))}
+                                        />{' '}
+                                        Easy to Read
                                     </label>
                                     <label>
-                                        <input type='checkbox' checked={includeNumber} onChange={(e) => dispatch(setIncludeNumber(e.target.checked))} /> Add number
-                                    </label>
-                                </div>
+                                        <input
+                                            type="radio"
+                                            value="easyToSay"
+                                            checked={characterType === 'easyToSay'}
+                                            onChange={() => dispatch(setCharacterType('easyToSay'))}
+                                        />{' '}
+                                        Easy to Say
+                                    </label>*/}
+                                </div><br />
                                 <div className="text-center">
                                     <button className='btn btn-primary' onClick={handleGenerate} >Generate Password</button>
                                 </div>

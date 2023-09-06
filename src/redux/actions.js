@@ -16,8 +16,18 @@ export const setPasswordLength = (length) => ({
   export const setIncludeNumber = (includeNumber) => ({
     type: 'SET_INCLUDE_NUMBER',
     payload: includeNumber
+  });
+
+  export const setIncludeSymboal = (includeSymboal) => ({
+    type: 'SET_INCLUDE_SYMBOAL',
+    payload: includeSymboal
   })
 
   export const generatePassword = () => ({
     type: 'GENERATE_PASSWORD',
   });
+
+//  export const setCharacterType = (characterType) => ({
+//    type: 'SET_CHARACTER_TYPE',
+//    payload: characterType,
+//  });
