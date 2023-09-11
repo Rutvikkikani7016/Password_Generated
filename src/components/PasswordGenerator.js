@@ -48,6 +48,20 @@ const PasswordGenerator = () => {
         dispatch(easyToRead());
     }
 
+//    const handleEasyToSay = () => {
+//        //disable all the radio button
+//        document.getElementById("number").disabled = true;
+//        document.getElementById("symbol").disabled = true;
+//
+//        //get the value if checkbox is checked
+//        var dev = document.getElementById("myCheck").checked;
+//        if (dev == false) {
+//            //enable all the radio button
+//            document.getElementById("number").disabled = false;
+//            document.getElementById("symbol").disabled = false;
+//        }
+//    }
+
     return (<>
         <div className="container mt-5">
             <h1 className="text-center">Password Generator</h1>

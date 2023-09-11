@@ -22,16 +22,3 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-#    const handleEasyToSay = () => {
-#        //disable all the radio button
-#        document.getElementById("number").disabled = true;
-#        document.getElementById("symbol").disabled = true;
-#
-#        //get the value if checkbox is checked
-#        var dev = document.getElementById("myCheck").checked;
-#        if (dev == false) {
-#            //enable all the radio button
-#            document.getElementById("number").disabled = false;
-#            document.getElementById("symbol").disabled = false;
-#        }
-#    }
