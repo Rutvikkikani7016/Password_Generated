@@ -33,8 +33,10 @@ const PasswordGenerator = () => {
 
     const handlerCopy = () => {
         if (password) {
-            navigator.clipboard.writeText(generatePassword);
-            alert('copied..')
+            var text = document.getElementById("Password");
+            text.select();
+            document.execCommand("copy");
+            alert("Copied the Password");
         }
     }
 
@@ -79,6 +81,7 @@ const PasswordGenerator = () => {
                                     <label>
                                         <input type="radio" name='radio1' onClick={handleSelectAll} /> Select All &nbsp;
                                         <input type='radio' name='radio1' onClick={handleEasyToRead} /> Easy to Read &nbsp;
+                                        <input type='radio' name='radio1' /> Easy to Say &nbsp;
                                     </label>&nbsp;
                                     <label htmlFor="passwordLength" className="form-label"><b>Select one of the checkboxes:</b></label>
                                     <label>

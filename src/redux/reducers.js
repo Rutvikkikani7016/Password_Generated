@@ -1,4 +1,3 @@
-
 const initialState = {
     passwordLength: 6,
     includeUppercase: true,
@@ -17,38 +16,43 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 passwordLength: newPasswordLength,
             };
-        // for set upper
+
+        // set uppercase
         case 'SET_INCLUDE_UPPERCASE':
             return {
                 ...state,
                 includeUppercase: action.payload,
             };
-        // set for low
+
+        // set lowercase
         case 'SET_INCLUDE_LOWERCASE':
             return {
                 ...state,
                 includeLowercase: action.payload,
             };
-        // set for number
+
+        // set number
         case 'SET_INCLUDE_NUMBER':
             return {
                 ...state,
                 includeNumber: action.payload,
             }
-        // set for symbol
+
+        // set symbol
         case 'SET_INCLUDE_SYMBOL':
             return {
                 ...state,
                 includeSymbols: action.payload,
             }
-        // set for create
+
+        // create password
         case 'GENERATE_PASSWORD':
             return {
                 ...state,
                 password: generatePassword(state),
             };
 
-        // set for all box checked
+        // all box are checked
         case 'CHECK_ALL_CHECKBOXES':
             return {
                 ...state,
@@ -57,7 +61,6 @@ const rootReducer = (state = initialState, action) => {
                 includeNumber: true,
                 includeSymbols: true,
             };
-
 
         // set for only upp or low
         case 'CHECK_EASY_TO_READ':
