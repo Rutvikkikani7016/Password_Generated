@@ -17,7 +17,7 @@ const rootReducer = (state = initialState, action) => {
                 passwordLength: newPasswordLength,
             };
 
-        // set uppercase
+        // set for uppercase
         case 'SET_INCLUDE_UPPERCASE':
             return {
                 ...state,
