@@ -5,15 +5,16 @@ import {
     setPasswordLength,
     setIncludeUppercase,
     setIncludeLowercase,
-    setIncludeNumber,
-    setIncludeSymboal,
-    //setCharacterType,
+    setIncludeNumbers,
+    setIncludeSymbols,
+    checkAllCheckboxes,
+    easyToRead,
     generatePassword,
 } from '../redux/actions';
 
 const PasswordGenerator = () => {
     const dispatch = useDispatch();
-    const { passwordLength, includeUppercase, includeLowercase, includeNumber,includeSymboal, password } = useSelector((state) => state);
+    const { passwordLength, includeUppercase, includeLowercase, includeNumbers, includeSymbols, password } = useSelector((state) => state);
 
     const handleGenerate = (e) => {
         e.preventDefault()
@@ -36,6 +37,15 @@ const PasswordGenerator = () => {
             alert('copied..')
         }
     }
+
+    const handleSelectAll = () => {
+        dispatch(checkAllCheckboxes());
+    };
+
+    const handleEasyToRead = () => {
+        dispatch(easyToRead());
+    }
+
 
     return (<>
         <div className="container mt-5">
@@ -66,40 +76,18 @@ const PasswordGenerator = () => {
                                 </div>
 
                                 <div className='row'>
-                                    <label htmlFor="passwordLength" className="form-label">Select one of the checkboxes:</label>
+                                    <label htmlFor='passwordLength' className="form-label"><b>Select one of the radio boxes:</b></label>
                                     <label>
-                                        <input type="checkbox" checked={includeUppercase} onChange={(e) => dispatch(setIncludeUppercase(e.target.checked))} /> Add Uppercase &nbsp;
-                                        <input type="checkbox" checked={includeLowercase} onChange={(e) => dispatch(setIncludeLowercase(e.target.checked))} /> Add Lowercase &nbsp;
-                                        <input type='checkbox' checked={includeNumber} onChange={(e) => dispatch(setIncludeNumber(e.target.checked))} /> Add number &nbsp;
-                                        <input type='checkbox' checked={includeSymboal} onChange={(e) => dispatch(setIncludeSymboal(e.target.checked))} /> Add Symboal
-                                    </label>
-                                    {/*<label>
-                                        <input
-                                            type="radio"
-                                            value="allCharacters"
-                                            checked={characterType === 'allCharacters'}
-                                            onChange={() => dispatch(setCharacterType('allCharacters'))}
-                                        />{' '}
-                                        All Characters
-                                    </label>
+                                        <input type='radio' onClick={handleEasyToRead} /> Easy to Read &nbsp;
+                                        <input type="radio" onClick={handleSelectAll} /> Select All &nbsp;
+                                    </label>&nbsp;
+                                    <label htmlFor="passwordLength" className="form-label"><b>Select one of the checkboxes: </b></label>
                                     <label>
-                                        <input
-                                            type="radio"
-                                            value="easyToRead"
-                                            checked={characterType === 'easyToRead'}
-                                            onChange={() => dispatch(setCharacterType('easyToRead'))}
-                                        />{' '}
-                                        Easy to Read
+                                        <input type='checkbox' checked={includeUppercase} onChange={() => dispatch(setIncludeUppercase())} /> {' '} Add Uppercase &nbsp;
+                                        <input type='checkbox' checked={includeLowercase} onChange={() => dispatch(setIncludeLowercase())} /> {' '} Add Lowercase &nbsp;
+                                        <input type='checkbox' checked={includeNumbers} onChange={() => dispatch(setIncludeNumbers())} /> {' '} Add number &nbsp;
+                                        <input type='checkbox' checked={includeSymbols} onChange={() => dispatch(setIncludeSymbols())} /> {' '} Add Symboal
                                     </label>
-                                    <label>
-                                        <input
-                                            type="radio"
-                                            value="easyToSay"
-                                            checked={characterType === 'easyToSay'}
-                                            onChange={() => dispatch(setCharacterType('easyToSay'))}
-                                        />{' '}
-                                        Easy to Say
-                                    </label>*/}
                                 </div><br />
                                 <div className="text-center">
                                     <button className='btn btn-primary' onClick={handleGenerate} >Generate Password</button>

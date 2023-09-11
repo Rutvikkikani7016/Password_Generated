@@ -1,9 +1,10 @@
 
 const initialState = {
     passwordLength: 6,
-    includeUppercase: true,
-    includeLowercase: true,
-    includeNumber: false,
+    includeUppercase: false,
+    includeLowercase: false,
+    includeNumbers: false,
+    includeSymbols: false,
     //characterType: 'easyToSay',
     password: '',
 };
@@ -33,13 +34,13 @@ const rootReducer = (state = initialState, action) => {
         case 'SET_INCLUDE_NUMBER':
             return {
                 ...state,
-                includeNumber: action.payload,
+                includeNumbers: action.payload,
             }
         // set for symboal
-        case 'SET_INCLUDE_SYMBOAL' :
+        case 'SET_INCLUDE_SYMBOL':
             return {
                 ...state,
-                includeSymboal : action.payload,
+                includeSymbols: action.payload,
             }
         // set for create
         case 'GENERATE_PASSWORD':
@@ -48,11 +49,23 @@ const rootReducer = (state = initialState, action) => {
                 password: generatePassword(state),
             };
 
-        //case 'SET_CHARACTER_TYPE':
-        //    return {
-        //        ...state,
-        //        characterType: action.payload,
-        //    };
+        case 'CHECK_ALL_CHECKBOXES':
+            return {
+                ...state,
+                includeUppercase: true,
+                includeLowercase: true,
+                includeNumbers: true,
+                includeSymbols: true,
+            };
+
+        case 'CHECK_EASY_TO_READ':
+            return{
+                ...state,
+                includeUppercase: true,
+                includeLowercase: true,
+                includeNumbers: false,
+                includeSymbols: false,
+            };
 
         default:
             return state;
@@ -64,8 +77,8 @@ const generatePassword = (state) => {
     const charset = [
         state.includeUppercase ? 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' : '',
         state.includeLowercase ? 'abcdefghijklmnopqrstuvwxyz' : '',
-        state.includeNumber ? 1234567890 : '',
-        state.includeSyamboal ? '!@#$%^&*()_+[]{}|:;,.<>?/' : '',
+        state.includeNumbers ? '1234567890' : '',
+        state.includeSymbols ? '!@#$%^&*()_+[]{}""\/-|:;,.<>?' : '',
     ].join('');
     let newPassword = '';
     for (let i = 0; i < state.passwordLength; i++) {
@@ -77,46 +90,6 @@ const generatePassword = (state) => {
 export default rootReducer;
 
 
-    //    const charset = [
-    //        state.includeUppercase ? 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' : '',
-    //        state.includeLowercase ? 'abcdefghijklmnopqrstuvwxyz' : '',
-    //        state.includeNumbers ? '0123456789' : '',
-    //        state.includeSymbols ? '!@#$%^&*()_+[]{}|;:,.<>?/' : '',
-    //    ].join('');
-    //
-    //    let newPassword = '';
-    //    for (let i = 0; i < state.passwordLength; i++) {
-    //        const randomIndex = Math.floor(Math.random() * charset.length);
-    //        newPassword += charset.charAt(randomIndex);
-    //    }
-    //
-    //    if (state.characterType === 'easyToSay') {
-    //        newPassword = makePasswordEasyToSay(newPassword);
-    //    } else if (state.characterType === 'easyToRead') {
-    //        newPassword = makePasswordEasyToRead(newPassword);
-    //    }
-    //    return newPassword;
-    //};
-    //
-    //const makePasswordEasyToSay = (password) => {
-    //    // Implement logic to make the password easy to say
-    //    // For example, remove visually similar characters
-    //    password = password.replace(/[0OoI1l]/g, '');
-    //    return password;
-    //};
-    //
-    //const makePasswordEasyToRead = (password) => {
-    //    // Implement logic to make the password easy to read
-    //    // For example, use characters that are less likely to be confused
-    //    password = password.replace(/[0OoI1l]/g, 'AaBbCcDdEeFfGgHhJjKkMmNnPpQqRrSsTtUuVvWwXxYyZz23456789');
-    //    return password;
-    //};
-
-
-
-//export default combineReducers({
-//    password: passwordReducer,
-//});
 
 
 
