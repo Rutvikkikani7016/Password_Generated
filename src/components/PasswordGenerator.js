@@ -5,7 +5,7 @@ import {
     setPasswordLength,
     setIncludeUppercase,
     setIncludeLowercase,
-    setIncludeNumbers,
+    setIncludeNumber,
     setIncludeSymbols,
     checkAllCheckboxes,
     easyToRead,
@@ -14,7 +14,7 @@ import {
 
 const PasswordGenerator = () => {
     const dispatch = useDispatch();
-    const { passwordLength, includeUppercase, includeLowercase, includeNumbers, includeSymbols, password } = useSelector((state) => state);
+    const { passwordLength, includeUppercase, includeLowercase, includeNumber, includeSymbols, password } = useSelector((state) => state);
 
     const handleGenerate = (e) => {
         e.preventDefault()
@@ -45,7 +45,6 @@ const PasswordGenerator = () => {
     const handleEasyToRead = () => {
         dispatch(easyToRead());
     }
-
 
     return (<>
         <div className="container mt-5">
@@ -78,15 +77,15 @@ const PasswordGenerator = () => {
                                 <div className='row'>
                                     <label htmlFor='passwordLength' className="form-label"><b>Select one of the radio boxes:</b></label>
                                     <label>
-                                        <input type='radio' onClick={handleEasyToRead} /> Easy to Read &nbsp;
-                                        <input type="radio" onClick={handleSelectAll} /> Select All &nbsp;
+                                        <input type="radio" name='radio1' onClick={handleSelectAll} /> Select All &nbsp;
+                                        <input type='radio' name='radio1' onClick={handleEasyToRead} /> Easy to Read &nbsp;
                                     </label>&nbsp;
-                                    <label htmlFor="passwordLength" className="form-label"><b>Select one of the checkboxes: </b></label>
+                                    <label htmlFor="passwordLength" className="form-label"><b>Select one of the checkboxes:</b></label>
                                     <label>
-                                        <input type='checkbox' checked={includeUppercase} onChange={() => dispatch(setIncludeUppercase())} /> {' '} Add Uppercase &nbsp;
-                                        <input type='checkbox' checked={includeLowercase} onChange={() => dispatch(setIncludeLowercase())} /> {' '} Add Lowercase &nbsp;
-                                        <input type='checkbox' checked={includeNumbers} onChange={() => dispatch(setIncludeNumbers())} /> {' '} Add number &nbsp;
-                                        <input type='checkbox' checked={includeSymbols} onChange={() => dispatch(setIncludeSymbols())} /> {' '} Add Symboal
+                                        <input type="checkbox" checked={includeUppercase} onChange={(e) => dispatch(setIncludeUppercase(e.target.checked))} /> Add Uppercase &nbsp;
+                                        <input type="checkbox" checked={includeLowercase} onChange={(e) => dispatch(setIncludeLowercase(e.target.checked))} /> Add Lowercase &nbsp;
+                                        <input type='checkbox' checked={includeNumber} onChange={(e) => dispatch(setIncludeNumber(e.target.checked))} /> Add number &nbsp;
+                                        <input type='checkbox' checked={includeSymbols} onChange={(e) => dispatch(setIncludeSymbols(e.target.checked))} /> Add Symbol
                                     </label>
                                 </div><br />
                                 <div className="text-center">

@@ -1,11 +1,10 @@
 
 const initialState = {
     passwordLength: 6,
-    includeUppercase: false,
+    includeUppercase: true,
     includeLowercase: false,
-    includeNumbers: false,
+    includeNumber: false,
     includeSymbols: false,
-    //characterType: 'easyToSay',
     password: '',
 };
 
@@ -34,9 +33,9 @@ const rootReducer = (state = initialState, action) => {
         case 'SET_INCLUDE_NUMBER':
             return {
                 ...state,
-                includeNumbers: action.payload,
+                includeNumber: action.payload,
             }
-        // set for symboal
+        // set for symbol
         case 'SET_INCLUDE_SYMBOL':
             return {
                 ...state,
@@ -49,21 +48,24 @@ const rootReducer = (state = initialState, action) => {
                 password: generatePassword(state),
             };
 
+        // set for all box checked
         case 'CHECK_ALL_CHECKBOXES':
             return {
                 ...state,
                 includeUppercase: true,
                 includeLowercase: true,
-                includeNumbers: true,
+                includeNumber: true,
                 includeSymbols: true,
             };
 
+
+        // set for only upp or low
         case 'CHECK_EASY_TO_READ':
-            return{
+            return {
                 ...state,
                 includeUppercase: true,
                 includeLowercase: true,
-                includeNumbers: false,
+                includeNumber: false,
                 includeSymbols: false,
             };
 
@@ -77,8 +79,8 @@ const generatePassword = (state) => {
     const charset = [
         state.includeUppercase ? 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' : '',
         state.includeLowercase ? 'abcdefghijklmnopqrstuvwxyz' : '',
-        state.includeNumbers ? '1234567890' : '',
-        state.includeSymbols ? '!@#$%^&*()_+[]{}""\/-|:;,.<>?' : '',
+        state.includeNumber ? '1234567890' : '',
+        state.includeSymbols ? '!@#$%^&*()_+[]{}|:;,.<>?/' : '',
     ].join('');
     let newPassword = '';
     for (let i = 0; i < state.passwordLength; i++) {
@@ -88,13 +90,4 @@ const generatePassword = (state) => {
     return newPassword
 }
 export default rootReducer;
-
-
-
-
-
-
-
-
-
 
