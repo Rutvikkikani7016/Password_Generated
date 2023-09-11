@@ -5,7 +5,7 @@ import {
     setPasswordLength,
     setIncludeUppercase,
     setIncludeLowercase,
-    setIncludeNumber,
+    setIncludeNumbers,
     setIncludeSymbols,
     checkAllCheckboxes,
     easyToRead,
@@ -14,19 +14,17 @@ import {
 
 const PasswordGenerator = () => {
     const dispatch = useDispatch();
-    const { passwordLength, includeUppercase, includeLowercase, includeNumber, includeSymbols, password } = useSelector((state) => state);
+    const { passwordLength, includeUppercase, includeLowercase, includeNumbers, includeSymbols, password } = useSelector((state) => state);
 
     const handleGenerate = (e) => {
         e.preventDefault()
         dispatch(generatePassword());
     };
-
     //    useEffect((e) => {
     //        e.preventDefault();
     //        dispatch(generatePassword());
     //        dispatch(setPasswordLength(parseInt(e.target.value)));
     //    });
-
     const handleSliderChange = (e) => {
         dispatch(setPasswordLength(parseInt(e.target.value)));
     };
@@ -48,19 +46,19 @@ const PasswordGenerator = () => {
         dispatch(easyToRead());
     }
 
-//    const handleEasyToSay = () => {
-//        //disable all the radio button
-//        document.getElementById("number").disabled = true;
-//        document.getElementById("symbol").disabled = true;
-//
-//        //get the value if checkbox is checked
-//        var dev = document.getElementById("myCheck").checked;
-//        if (dev == false) {
-//            //enable all the radio button
-//            document.getElementById("number").disabled = false;
-//            document.getElementById("symbol").disabled = false;
-//        }
-//    }
+        const handleEasyToSay = () => {
+            //disable all the radio button
+            document.getElementById("number").disabled = true;
+            document.getElementById("symbol").disabled = true;
+
+            //get the value if checkbox is checked
+            var dev = document.getElementById("myCheck").checked;
+            if (dev === false) {
+                //enable all the radio button
+                document.getElementById("number").disabled = false;
+                document.getElementById("symbol").disabled = false;
+            }
+        }
 
     return (<>
         <div className="container mt-5">
@@ -95,14 +93,14 @@ const PasswordGenerator = () => {
                                     <label>
                                         <input type="radio" name='radio1' onClick={handleSelectAll} /> Select All &nbsp;
                                         <input type='radio' name='radio1' onClick={handleEasyToRead} /> Easy to Read &nbsp;
-                                        <input type='radio' name='radio1' /> Easy to Say &nbsp;
+                                        <input type='radio' name='radio1' id='myCheck' onClick={handleEasyToSay} /> Easy to Say &nbsp;
                                     </label>&nbsp;
                                     <label htmlFor="passwordLength" className="form-label"><b>Select one of the checkboxes:</b></label>
                                     <label>
                                         <input type="checkbox" checked={includeUppercase} onChange={(e) => dispatch(setIncludeUppercase(e.target.checked))} /> Add Uppercase &nbsp;
                                         <input type="checkbox" checked={includeLowercase} onChange={(e) => dispatch(setIncludeLowercase(e.target.checked))} /> Add Lowercase &nbsp;
-                                        <input type='checkbox' checked={includeNumber} onChange={(e) => dispatch(setIncludeNumber(e.target.checked))} /> Add number &nbsp;
-                                        <input type='checkbox' checked={includeSymbols} onChange={(e) => dispatch(setIncludeSymbols(e.target.checked))} /> Add Symbol
+                                        <input type='checkbox' checked={includeNumbers} id='number' name='number' onChange={(e) => dispatch(setIncludeNumbers(e.target.checked))} /> Add number &nbsp;
+                                        <input type='checkbox' checked={includeSymbols} id='symbol' name='symbol' onChange={(e) => dispatch(setIncludeSymbols(e.target.checked))} /> Add Symbol
                                     </label>
                                 </div><br />
                                 <div className="text-center">

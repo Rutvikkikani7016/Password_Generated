@@ -2,7 +2,7 @@ const initialState = {
     passwordLength: 6,
     includeUppercase: true,
     includeLowercase: false,
-    includeNumber: false,
+    includeNumbers: false,
     includeSymbols: false,
     password: '',
 };
@@ -32,14 +32,14 @@ const rootReducer = (state = initialState, action) => {
             };
 
         // set number
-        case 'SET_INCLUDE_NUMBER':
+        case 'SET_INCLUDE_NUMBERS':
             return {
                 ...state,
-                includeNumber: action.payload,
+                includeNumbers: action.payload,
             }
 
         // set symbol
-        case 'SET_INCLUDE_SYMBOL':
+        case 'SET_INCLUDE_SYMBOLS':
             return {
                 ...state,
                 includeSymbols: action.payload,
@@ -58,7 +58,7 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 includeUppercase: true,
                 includeLowercase: true,
-                includeNumber: true,
+                includeNumbers: true,
                 includeSymbols: true,
             };
 
@@ -68,7 +68,7 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 includeUppercase: true,
                 includeLowercase: true,
-                includeNumber: false,
+                includeNumbers: false,
                 includeSymbols: false,
             };
 
@@ -82,7 +82,7 @@ const generatePassword = (state) => {
     const charset = [
         state.includeUppercase ? 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' : '',
         state.includeLowercase ? 'abcdefghijklmnopqrstuvwxyz' : '',
-        state.includeNumber ? '1234567890' : '',
+        state.includeNumbers ? '1234567890' : '',
         state.includeSymbols ? '!@#$%^&*()_+[]{}|:;,.<>?/' : '',
     ].join('');
     let newPassword = '';
