@@ -7,6 +7,7 @@ const SET_INCLUDE_SYMBOLS = 'SET_INCLUDE_SYMBOLS'
 const GENERATE_PASSWORD = 'GENERATE_PASSWORD'
 const CHECK_ALL_CHECKBOXES = 'CHECK_ALL_CHECKBOXES'
 const CHECK_EASY_TO_READ = 'CHECK_EASY_TO_READ'
+const SET_PASSWORD = 'SET_PASSWORD';
 
 
 // set length
@@ -55,5 +56,9 @@ export const checkAllCheckboxes = () => ({
 // set for only two box
 export const easyToRead = () => ({
     type: CHECK_EASY_TO_READ,
-})
+});
 
+export const setPassword = (password) => ({
+    type: SET_PASSWORD,
+    payload: password,
+});

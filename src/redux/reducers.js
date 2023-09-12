@@ -72,6 +72,12 @@ const rootReducer = (state = initialState, action) => {
                 includeSymbols: false,
             };
 
+        case 'SET_PASSWORD':
+            return {
+                ...state,
+                password: action.payload, // Update the password
+            };
+
         default:
             return state;
     }

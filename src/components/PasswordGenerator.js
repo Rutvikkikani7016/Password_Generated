@@ -10,10 +10,12 @@ import {
     checkAllCheckboxes,
     easyToRead,
     generatePassword,
+    setPassword
 } from '../redux/actions';
 
 const PasswordGenerator = () => {
     const dispatch = useDispatch();
+
     const { passwordLength, includeUppercase, includeLowercase, includeNumbers, includeSymbols, password } = useSelector((state) => state);
 
     const handleGenerate = (e) => {
@@ -27,6 +29,11 @@ const PasswordGenerator = () => {
     //    });
     const handleSliderChange = (e) => {
         dispatch(setPasswordLength(parseInt(e.target.value)));
+    };
+
+    const handlePasswordChange = (e) => {
+        const password = e.target.value;
+        dispatch(setPassword(password));
     };
 
     const handlerCopy = () => {
@@ -46,19 +53,19 @@ const PasswordGenerator = () => {
         dispatch(easyToRead());
     }
 
-        const handleEasyToSay = () => {
-            //disable all the radio button
-            document.getElementById("number").disabled = true;
-            document.getElementById("symbol").disabled = true;
+    const handleEasyToSay = () => {
+        //disable all the radio button
+        document.getElementById("number").disabled = true;
+        document.getElementById("symbol").disabled = true;
 
-            //get the value if checkbox is checked
-            var dev = document.getElementById("myCheck").checked;
-            if (dev === false) {
-                //enable all the radio button
-                document.getElementById("number").disabled = false;
-                document.getElementById("symbol").disabled = false;
-            }
+        //get the value if checkbox is checked
+        var dev = document.getElementById("myCheck").checked;
+        if (dev === false) {
+            //enable all the radio button
+            document.getElementById("number").disabled = false;
+            document.getElementById("symbol").disabled = false;
         }
+    }
 
     return (<>
         <div className="container mt-5">
@@ -71,10 +78,25 @@ const PasswordGenerator = () => {
                                 <label htmlFor="Password" className="form-label">Generated Password:</label>
                                 <div className='row'>
                                     <div className="mb-3 col-9">
-                                        <input type="text" className="form-control" value={password} id="Password" readOnly />
+                                        <input type="text" className="form-control" value={password} id="Password" onChange={handlePasswordChange} />
                                     </div>
                                     <div className='mb-3 col-3'>
                                         <button className='btn btn-secondary' onClick={handlerCopy}>copy</button>
+                                    </div>
+                                </div>
+
+                                <div className="progress">
+                                    <div className={`progress-bar bg-danger`} style={{ width: `${(passwordLength < 3) * 100}%` }}>
+                                        {/*{passwordLength} */}Poor
+                                    </div>
+                                    <div className={`progress-bar bg-warning`} role="progressbar" style={{ width: `${(passwordLength >= 3 && passwordLength <= 6) * 100}%` }}>
+                                        {/*{passwordLength} */}Weak
+                                    </div>
+                                    <div className={`progress-bar bg-info`} role="progressbar" style={{ width: `${(passwordLength >= 7 && passwordLength <= 8) * 100}%` }}>
+                                        {/*{passwordLength} */}Better
+                                    </div>
+                                    <div className={`progress-bar bg-success`} role="progressbar" style={{ width: `${(passwordLength >= 9) * 100}%` }}>
+                                        {/*{passwordLength} */}Strong
                                     </div>
                                 </div>
 
@@ -111,7 +133,7 @@ const PasswordGenerator = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     </>
     );
 };
