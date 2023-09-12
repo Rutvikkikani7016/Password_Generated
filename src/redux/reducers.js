@@ -86,8 +86,8 @@ const rootReducer = (state = initialState, action) => {
 const generatePassword = (state) => {
 
     const charset = [
-        state.includeUppercase ? 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' : '',
-        state.includeLowercase ? 'abcdefghijklmnopqrstuvwxyz' : '',
+        state.includeUppercase ? 'QWERTYUIOPLKJHGFDSAZXCVBNM' : '',
+        state.includeLowercase ? 'qwaszxdecvfrtgbnhyujnmkiolp' : '',
         state.includeNumbers ? '1234567890' : '',
         state.includeSymbols ? '!@#$%^&*()_+[]{}|:;,.<>?/' : '',
     ].join('');
@@ -99,4 +99,3 @@ const generatePassword = (state) => {
     return newPassword
 }
 export default rootReducer;
-

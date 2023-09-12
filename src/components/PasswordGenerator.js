@@ -43,7 +43,7 @@ const PasswordGenerator = () => {
             document.execCommand("copy");
             alert("Copied the Password");
         }
-    }
+    };
 
     const handleSelectAll = () => {
         dispatch(checkAllCheckboxes());
@@ -51,7 +51,7 @@ const PasswordGenerator = () => {
 
     const handleEasyToRead = () => {
         dispatch(easyToRead());
-    }
+    };
 
     const handleEasyToSay = () => {
         //disable all the radio button
@@ -65,7 +65,7 @@ const PasswordGenerator = () => {
             document.getElementById("number").disabled = false;
             document.getElementById("symbol").disabled = false;
         }
-    }
+    };
 
     return (<>
         <div className="container mt-5">
@@ -87,16 +87,16 @@ const PasswordGenerator = () => {
 
                                 <div className="progress">
                                     <div className={`progress-bar bg-danger`} style={{ width: `${(passwordLength < 3) * 100}%` }}>
-                                        {/*{passwordLength} */}Poor
+                                        {/*{passwordLength}*/}Poor
                                     </div>
                                     <div className={`progress-bar bg-warning`} role="progressbar" style={{ width: `${(passwordLength >= 3 && passwordLength <= 6) * 100}%` }}>
-                                        {/*{passwordLength} */}Weak
+                                        {/*{passwordLength}*/}Weak
                                     </div>
                                     <div className={`progress-bar bg-info`} role="progressbar" style={{ width: `${(passwordLength >= 7 && passwordLength <= 8) * 100}%` }}>
-                                        {/*{passwordLength} */}Better
+                                        {/*{passwordLength}*/}Better
                                     </div>
                                     <div className={`progress-bar bg-success`} role="progressbar" style={{ width: `${(passwordLength >= 9) * 100}%` }}>
-                                        {/*{passwordLength} */}Strong
+                                        {/*{passwordLength}*/}Strong
                                     </div>
                                 </div>
 
@@ -112,16 +112,28 @@ const PasswordGenerator = () => {
 
                                 <div className='row'>
                                     <label htmlFor='passwordLength' className="form-label"><b>Select one of the radio boxes:</b></label>
-                                    <label>
-                                        <input type="radio" name='radio1' onClick={handleSelectAll} /> Select All &nbsp;
-                                        <input type='radio' name='radio1' onClick={handleEasyToRead} /> Easy to Read &nbsp;
-                                        <input type='radio' name='radio1' id='myCheck' onClick={handleEasyToSay} /> Easy to Say &nbsp;
-                                    </label>&nbsp;
+                                    <div>
+                                        <div>
+                                            <input type="radio" name='radio1' onClick={handleSelectAll} /> Select All &nbsp;
+                                        </div>
+                                        <div>
+                                            <input type='radio' name='radio1' onClick={handleEasyToRead} /> Easy to Read &nbsp;
+                                        </div>
+                                        <div>
+                                            <input type='radio' name='radio1' id='myCheck' onClick={handleEasyToSay} /> Easy to Say &nbsp;
+                                        </div>
+                                    </div>&nbsp;
                                     <label htmlFor="passwordLength" className="form-label"><b>Select one of the checkboxes:</b></label>
                                     <label>
                                         <input type="checkbox" checked={includeUppercase} onChange={(e) => dispatch(setIncludeUppercase(e.target.checked))} /> Add Uppercase &nbsp;
+                                    </label>
+                                    <label>
                                         <input type="checkbox" checked={includeLowercase} onChange={(e) => dispatch(setIncludeLowercase(e.target.checked))} /> Add Lowercase &nbsp;
+                                    </label>
+                                    <label>
                                         <input type='checkbox' checked={includeNumbers} id='number' name='number' onChange={(e) => dispatch(setIncludeNumbers(e.target.checked))} /> Add number &nbsp;
+                                    </label>
+                                    <label>
                                         <input type='checkbox' checked={includeSymbols} id='symbol' name='symbol' onChange={(e) => dispatch(setIncludeSymbols(e.target.checked))} /> Add Symbol
                                     </label>
                                 </div><br />

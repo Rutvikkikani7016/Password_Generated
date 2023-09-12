@@ -58,6 +58,7 @@ export const easyToRead = () => ({
     type: CHECK_EASY_TO_READ,
 });
 
+// set custom password
 export const setPassword = (password) => ({
     type: SET_PASSWORD,
     payload: password,
